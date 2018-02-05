@@ -1,7 +1,6 @@
 package com.nowcoder.interceptor;
 
 import com.nowcoder.model.HostHolder;
-import jdk.internal.org.objectweb.asm.Handle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

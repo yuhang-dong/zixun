@@ -1,9 +1,11 @@
 package com.nowcoder.controller;
 
 
+import com.nowcoder.async.EventModel;
+import com.nowcoder.async.EventProducer;
+import com.nowcoder.async.EventType;
 import com.nowcoder.service.UserService;
 import com.nowcoder.util.ToutiaoUtil;
-import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/reg/"})
     @ResponseBody
@@ -73,6 +78,7 @@ public class LoginController {
                 cookie.setMaxAge(3600*1000*24*5);
             }
             response.addCookie(cookie);
+            eventProducer.fireEvent(new EventModel(EventType.LOGIN).setActorId((int)map.get("userId")));
             return ToutiaoUtil.getJSONString(0,"登录成功");
         }catch(Exception e) {
             logger.error("注册异常",e);

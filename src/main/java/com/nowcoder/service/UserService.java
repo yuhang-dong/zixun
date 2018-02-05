@@ -86,6 +86,7 @@ public class UserService {
         }
         String ticket = addTicket(user.getId());
         map.put("ticket",ticket);
+        map.put("userId",user.getId());
         return map;
     }
 

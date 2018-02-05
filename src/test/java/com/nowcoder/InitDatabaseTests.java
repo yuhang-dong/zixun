@@ -38,11 +38,12 @@ public class InitDatabaseTests {
     @Test
     public void contextLoads() {
         Random random = new Random();
-        List<Image> images = imageDao.getAllImage();
+        List<String> images = imageDao.getAllImage();
+        String image = "http://127.0.0.1:8080/image?name=";
         int imagesSize = images.size();
         for(int i=0;i<11;i++) {
             User user = new User();
-            user.setHeadUrl(images.get((int)(Math.random()*imagesSize)).getUrl());
+            user.setHeadUrl(image+images.get((int)(Math.random()*imagesSize)));
             user.setName("USER"+i);
             user.setPassword("");
             user.setSalt("");
@@ -54,7 +55,7 @@ public class InitDatabaseTests {
             date.setTime(date.getTime()-3600000*10*i);
             System.out.println(date);
             news.setCreatedDate(date);
-            news.setImage(images.get((int)(Math.random()*imagesSize)).getUrl());
+            news.setImage(image+images.get((int)(Math.random()*imagesSize)));
             news.setLikeCount(i);
             news.setLink(String.format("https://www.baidu.com/%d",random.nextInt()));
             news.setTitle("TITLE"+String.valueOf(i));
@@ -89,7 +90,7 @@ public class InitDatabaseTests {
 
     @Test
     public void testImage() {
-        List<Image> images = imageDao.getAllImage();
+        List<String> images = imageDao.getAllImage();
         Assert.assertNotNull(images);
     }
 }

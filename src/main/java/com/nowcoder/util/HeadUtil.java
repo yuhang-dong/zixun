@@ -1,7 +1,6 @@
 package com.nowcoder.util;
 
 import com.nowcoder.dao.ImageDao;
-import com.nowcoder.model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class HeadUtil {
 
 
     public String getRandomUrl() {
-        List<Image> images = imageDao.getAllImage();
-        return images.get((int)(Math.random()*images.size())).getUrl();
+        List<String> images = imageDao.getAllImage();
+        return "http://127.0.0.1:8080/image?name="+images.get((int)(Math.random()*images.size()));
     }
 }
