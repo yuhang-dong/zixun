@@ -77,5 +77,5 @@ public class ToutiaoUtil {
     }
 
     public static final String IMAGE_PATH = "E:\\tmp\\头像\\";
-    public static final String DOMAIN_URL = "http://127.0.0.1:8080/";
+    public static final String DOMAIN_URL = "the wesite url there";
 }
