@@ -22,8 +22,8 @@ public class ImageDao {
     }
 
 
-    public static void main(String[] args) {
-        ImageDao imageDao = new ImageDao();
-        imageDao.getAllImage();
-    }
+//    public static void main(String[] args) {
+//        ImageDao imageDao = new ImageDao();
+//        imageDao.getAllImage();
+//    }
 }
