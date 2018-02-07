@@ -1,4 +1,19 @@
 # Toutiao
+   * [Toutiao](#toutiao)
+      * [开发工具、主要框架](#开发工具主要框架)
+      * [Redis 实现点赞数](#redis-实现点赞数)
+      * [ThreadLocal 与 拦截器实现用户鉴别](#threadlocal-与-拦截器实现用户鉴别)
+      * [异步消息的发送](#异步消息的发送)
+         * [使用枚举类来限定处理的事件的类型。](#使用枚举类来限定处理的事件的类型)
+         * [将所有的事件包装为EventType类型。](#将所有的事件包装为eventtype类型)
+         * [采用类似于生产者-消费者模式实现异步](#采用类似于生产者-消费者模式实现异步)
+            * [生产者](#生产者)
+            * [处理器接口](#处理器接口)
+            * [消费者](#消费者)
+      * [后端接口设计](#后端接口设计)
+         * [Return View](#return-view)
+         * [Return Json](#return-json)
+      * [Bean 生命周期接口](#bean-生命周期接口)
 ## 开发工具、主要框架
 Git + Maven + IDEA + Spring Boot + Velocity + Mybatis
 
