@@ -29,4 +29,16 @@ public class MessageService {
     public int getConversationCount(int userId,String conversationId) {
         return messageDao.getConversationCount(userId,conversationId);
     }
+
+    public void readMessage(int messageId) {
+        messageDao.readMessage(messageId);
+    }
+
+    public void deleteGroupMessage(String id,int userId) {
+        messageDao.updateMessage(id,userId);
+    }
+
+    public void deleteMessage(int id) {
+        messageDao.deleteMessage(id);
+    }
 }

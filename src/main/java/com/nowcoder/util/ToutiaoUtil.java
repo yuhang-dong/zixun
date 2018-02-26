@@ -76,6 +76,6 @@ public class ToutiaoUtil {
         return false;
     }
 
-    public static final String IMAGE_PATH = "E:\\tmp\\头像\\";
-    public static final String DOMAIN_URL = "the wesite url there";
+    public static final String IMAGE_PATH = "/toutiao/uploads/";
+    public static final String DOMAIN_URL = "http://45.62.109.112:8080/";
 }

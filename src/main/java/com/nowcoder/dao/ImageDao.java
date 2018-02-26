@@ -1,5 +1,6 @@
 package com.nowcoder.dao;
 
+import com.nowcoder.util.ToutiaoUtil;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class ImageDao {
 
     public List<String> getAllImage() {
         List<String> images = new ArrayList<String>();
-        File folder = new File("E:\\tmp\\头像");
+        File folder = new File(ToutiaoUtil.IMAGE_PATH);
         for(File image : folder.listFiles()) {
             images.add(image.getName());
             //System.out.println(image.getName());

@@ -8,7 +8,7 @@
                     <div class="letter-info">
                         <span class="l-time">$!date.format('yyyy-MM-dd HH:mm:ss', $!{conversation.conversation.createdDate})</span>
                         <div class="l-operate-bar">
-                            <a href="javascript:void(0);" class="sns-action-del" data-id="10005_622873">
+                            <a href="/msg/deleteAllGroup?id=$!{conversation.conversation.conversationId}" class="sns-action-del" data-id="10005_622873" >
                             删除
                             </a>
                             <a href="/msg/detail?conversationId=$!{conversation.conversation.conversationId}">
@@ -17,9 +17,11 @@
                         </div>
                     </div>
                     <div class="chat-headbox">
+                        #if(${conversation.unread}>0)
                         <span class="msg-num">
                             $!{conversation.unread}
                         </span>
+                        #end
                         <a class="list-head" href="/user/$!{conversation.user.id}">
                             <img alt="头像" src="$!{conversation.user.headUrl}">
                         </a>
@@ -78,7 +80,8 @@
 
             });
 
-          })
-        </script>
+          });
+
+          </script>
     </div>
 #parse("footer.html")

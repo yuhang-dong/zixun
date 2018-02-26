@@ -16,6 +16,6 @@ public class HeadUtil {
 
     public String getRandomUrl() {
         List<String> images = imageDao.getAllImage();
-        return "http://127.0.0.1:8080/image?name="+images.get((int)(Math.random()*images.size()));
+        return ToutiaoUtil.DOMAIN_URL+"image?name="+images.get((int)(Math.random()*images.size()));
     }
 }

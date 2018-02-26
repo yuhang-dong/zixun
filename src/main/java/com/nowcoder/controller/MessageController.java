@@ -1,5 +1,8 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.async.EventModel;
+import com.nowcoder.async.EventProducer;
+import com.nowcoder.async.EventType;
 import com.nowcoder.dao.MessageDao;
 import com.nowcoder.model.HostHolder;
 import com.nowcoder.model.Message;
@@ -39,6 +42,9 @@ public class MessageController {
     @Autowired
     private HostHolder hostHolder;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     @RequestMapping(path = {"/msg/addMessage"},method = {RequestMethod.POST})
     @ResponseBody
     public String addMessage(@RequestParam("fromId")int fromId,
@@ -75,8 +81,13 @@ public class MessageController {
                 vo.set("headUrl", user.getHeadUrl());
                 vo.set("userId", user.getId());
                 messages.add(vo);
+                if(conversationDetail.getHasRead() == 0) {
+                    // 设置为读
+                    eventProducer.fireEvent(new EventModel(EventType.READMESSAGE).setEntityOwnerId(conversationDetail.getId()));
+                }
             }
             model.addAttribute("messages", messages);
+            model.addAttribute("conversationId", conversationId);
         }catch(Exception e){
             LOGGER.error("详情页错误",e);
         }
@@ -96,6 +107,7 @@ public class MessageController {
                 User user = userService.getUser(targetId);
                 vo.set("target",user);
                 vo.set("unread",messageService.getConversationCount(localUserId,message.getConversationId()));
+                vo.set("user",user);
                 conversations.add(vo);
             }
             model.addAttribute("conversations",conversations);
@@ -104,5 +116,24 @@ public class MessageController {
 
         }
         return "letter";
+    }
+
+    @RequestMapping("/msg/deleteAllGroup?id=")
+    public String deleteGroupMessage(@RequestParam("id")String id) {
+        // delete current user all message
+        int localUserId = hostHolder.get().getId();
+        messageService.deleteGroupMessage(id,localUserId);
+        return "redirect:/msg/list";
+    }
+
+
+    @RequestMapping("/msg/deleteMessage")
+    public String deleteMessage(@RequestParam("id")int id,@RequestParam("conversationId")String conversationId) {
+        int localUserId = hostHolder.get().getId();
+        // 确保该用户对该信息有修改权限
+        if(conversationId.contains(String.valueOf(localUserId))) {
+            messageService.deleteMessage(id);
+        }
+        return "redirect:/msg/detail?conversationId="+conversationId;
     }
 }
